@@ -17,9 +17,9 @@ import { useState } from 'react';
 
 const menuItems = [
   { name: '공지사항', href: '/notice', icon: Home },
-  { name: '계정관리', href: '/dashboard/reservations', icon: Users },
-  { name: '광고관리', href: '/dashboard/customers', icon: Calendar },
-  { name: '로그관리', href: '/dashboard/analytics', icon: BarChart },
+  { name: '계정관리', href: '/user', icon: Users },
+  { name: '광고관리', href: '/slot', icon: Calendar },
+  { name: '로그관리', href: '/logs', icon: BarChart },
 ];
 
 export default function Sidebar() {
