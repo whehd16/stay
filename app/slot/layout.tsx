@@ -35,7 +35,7 @@ export default function SlotLayout({
     <div className="flex h-screen bg-gray-100">
       <Sidebar />
       <main className="flex-1 overflow-y-auto">
-        <div className="p-8 lg:pl-8">
+        <div className="p-8 lg:pl-8 animate-in slide-in-from-top-2 fade-in duration-500 ease-out">
           {children}
         </div>
       </main>

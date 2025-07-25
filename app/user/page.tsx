@@ -83,12 +83,14 @@ export default function AccountManagementPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">계정관리</h1>
-      <h3 className="text-lg text-gray-900 mb-6">계정과 슬롯을 추가하고 계정 정보를 효율적으로 관리할 수 있습니다.</h3>
-      <div className="border-b border-gray-300 mb-6"></div>
+      <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-[0ms]">
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">계정관리</h1>
+        <h3 className="text-lg text-gray-900 mb-6">계정과 슬롯을 추가하고 계정 정보를 효율적으로 관리할 수 있습니다.</h3>
+        <div className="border-b border-gray-300 mb-6"></div>
+      </div>
       
       {/* 검색 및 버튼 영역 */}
-      <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-[300ms]">
         <div className="relative w-full sm:w-auto">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <Search className="h-5 w-5 text-gray-400" />
@@ -136,7 +138,7 @@ export default function AccountManagementPage() {
       </div>
 
       {/* 테이블 */}
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div className="bg-white shadow overflow-hidden sm:rounded-lg animate-in fade-in slide-in-from-bottom-6 duration-800 delay-[600ms]">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>

@@ -109,18 +109,20 @@ export default function SlotManagementPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">광고관리</h1>
-      <h3 className="text-lg text-gray-900 mb-6">광고를 수정하고 관리할 수 있습니다.</h3>
-      <div className="border-b border-gray-300 mb-4"></div>
+      <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-[0ms]">
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">광고관리</h1>
+        <h3 className="text-lg text-gray-900 mb-6">광고를 수정하고 관리할 수 있습니다.</h3>
+        <div className="border-b border-gray-300 mb-4"></div>
+      </div>
 
       {/* 탭 네비게이션 */}
-      <div className="mb-6">
+      <div className="mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-[300ms]">
         <nav className="flex space-x-8">
           {tabs.map((tab) => (
             <button
               key={tab.value}
               onClick={() => handleTabChange(tab.value as TabType)}
-              className={`px-2 py-3 text-sm font-medium transition-colors border-b-2 ${
+              className={`px-2 py-3 text-sm font-medium transition-all duration-300 ease-in-out border-b-2 ${
                 currentType === tab.value
                   ? 'text-indigo-600 border-indigo-600'
                   : 'text-gray-500 border-transparent hover:text-gray-700'
@@ -134,7 +136,7 @@ export default function SlotManagementPage() {
       </div>
 
       {/* 상태 요약 박스 */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
+      <div className="bg-white rounded-lg shadow p-6 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-[600ms]">
         <div className="grid grid-cols-4 gap-6 text-center">
           <div>
             <p className="text-sm text-gray-600 mb-2">전체</p>
@@ -156,7 +158,7 @@ export default function SlotManagementPage() {
       </div>
 
       {/* 검색 및 버튼 영역 */}
-      <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-[900ms]">
         <div className="relative w-full sm:w-auto">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <Search className="h-5 w-5 text-gray-400" />
@@ -207,7 +209,7 @@ export default function SlotManagementPage() {
       </div>
 
       {/* 테이블 */}
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div className="bg-white shadow overflow-hidden sm:rounded-lg animate-in fade-in slide-in-from-bottom-6 duration-800 delay-[1200ms]">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>

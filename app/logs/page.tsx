@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Search, Download, Calendar } from 'lucide-react';
+import { Search, Download, Calendar, FileText } from 'lucide-react';
 
 type TabType = 'NAVER_LOW_REWARD' | 'NAVER_NORMAL' | 'NAVER_LOGIC_1';
 
@@ -116,14 +116,14 @@ export default function LogsManagementPage() {
 
     return Array.from({ length: counts[type] }, (_, i) => ({
       id: i + 1,
-      category: i % 3 === 0 ? '발주' : '환불',
-      general: i % 2 === 0 ? 'Y' : 'N',
+      category: i % 3 === 0 ? '연장' : i % 3 === 1 ? '생성' : '환불',
+      general: `user${i + 1}`,
       quantity: Math.floor(Math.random() * 50) + 1,
       period: `${Math.floor(Math.random() * 30) + 1}일`,
       totalDays: Math.floor(Math.random() * 30) + 1,
       createdAt: new Date(2024, 0, Math.floor(Math.random() * 30) + 1).toLocaleString('ko-KR'),
       startDate: new Date(2024, 0, Math.floor(Math.random() * 30) + 1).toLocaleDateString('ko-KR'),
-      deleteLog: i % 5 === 0 ? '삭제됨' : '정상',
+      deleteLog: i % 5 === 0 ? true : false,
       type: type,
     }));
   };
@@ -172,7 +172,7 @@ export default function LogsManagementPage() {
             <button
               key={tab.value}
               onClick={() => handleTabChange(tab.value as TabType)}
-              className={`px-2 py-3 text-sm font-medium transition-colors border-b-2 ${
+              className={`px-2 py-3 text-sm font-medium transition-all duration-300 ease-in-out border-b-2 ${
                 currentType === tab.value
                   ? 'text-indigo-600 border-indigo-600'
                   : 'text-gray-500 border-transparent hover:text-gray-700'
@@ -265,18 +265,10 @@ export default function LogsManagementPage() {
       </div>
 
       {/* 테이블 */}
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div className="bg-white shadow overflow-hidden sm:rounded-lg transition-all duration-300 ease-in-out opacity-100 transform translate-x-0">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left">
-                <input
-                  type="checkbox"
-                  onChange={handleSelectAll}
-                  checked={selectedLogs.length === paginatedLogs.length && paginatedLogs.length > 0}
-                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                />
-              </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 번호
               </th>
@@ -284,7 +276,7 @@ export default function LogsManagementPage() {
                 구분
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                일반
+                사용자 ID
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 수량
@@ -309,34 +301,22 @@ export default function LogsManagementPage() {
           <tbody className="bg-white divide-y divide-gray-200">
             {paginatedLogs.map((log) => (
               <tr key={log.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <input
-                    type="checkbox"
-                    checked={selectedLogs.includes(log.id)}
-                    onChange={() => handleSelectLog(log.id)}
-                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                  />
-                </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {log.id}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                    log.category === '발주' 
+                    log.category === '연장' 
                       ? 'bg-blue-100 text-blue-800' 
+                      : log.category === '생성'
+                      ? 'bg-green-100 text-green-800'
                       : 'bg-red-100 text-red-800'
                   }`}>
                     {log.category}
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">
-                  <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                    log.general === 'Y' 
-                      ? 'bg-green-100 text-green-800' 
-                      : 'bg-gray-100 text-gray-800'
-                  }`}>
-                    {log.general}
-                  </span>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {log.general}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {log.quantity}
@@ -354,13 +334,15 @@ export default function LogsManagementPage() {
                   {log.startDate}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
-                  <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                    log.deleteLog === '삭제됨' 
-                      ? 'bg-red-100 text-red-800' 
-                      : 'bg-green-100 text-green-800'
-                  }`}>
-                    {log.deleteLog}
-                  </span>
+                  {log.deleteLog && (
+                    <button
+                      onClick={() => alert('삭제 로그 확인')}
+                      className="text-gray-600 hover:text-gray-900"
+                      title="삭제 로그 보기"
+                    >
+                      <FileText className="h-4 w-4" />
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
